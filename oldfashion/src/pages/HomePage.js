@@ -1,18 +1,14 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import Layout from '../components/Layout';
+import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <Container fluid>
-      <Row>
-        <Col xs={12} md={6}>
-          <h2>Recent Games</h2>
-        </Col>
-        <Col xs={12} md={6}>
-          <h2>User Info</h2>
-        </Col>
-      </Row>
-    </Container>
+    <Layout>
+      <h1>Welcome to OldFashion</h1>
+      <p>Recent uploads of games and user information will go here.</p>
+    </Layout>
   );
 };
 
