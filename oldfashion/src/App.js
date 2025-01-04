@@ -20,6 +20,7 @@ const App = () => {
 
 export default App;
 
+//Remove later
 console.log('Component Rendered');
 
 
