@@ -1,11 +1,14 @@
 import React from 'react';
+import Layout from '../components/Layout';
+
 
 const LoginPage = () => {
-    return (
-        <div>
-            <h1>Login Page</h1>
-        </div>
-    );
+  return (
+    <Layout>
+      <h1>Welcome to OldFashion</h1>
+      <p>Login Page.</p>
+    </Layout>
+  );
 };
 
 export default LoginPage;

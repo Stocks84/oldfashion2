@@ -1,11 +1,15 @@
 import React from 'react';
+import Layout from '../components/Layout';
+
 
 const GameDetailsPage = () => {
   return (
-    <div>
-      <h1>Login Page</h1>
-    </div>
+    <Layout>
+      <h1>Welcome to OldFashion</h1>
+      <p>Game Details Page</p>
+    </Layout>
   );
 };
 
 export default GameDetailsPage;
+
