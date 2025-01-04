@@ -1,12 +1,19 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
 
 const HomePage = () => {
-    return (
-        <div>
-            <h1>HomePage</h1>
-            <p>Recent uploads of games of games and user information will go here.</p>
-        </div>
-    );
+  return (
+    <Container fluid>
+      <Row>
+        <Col xs={12} md={6}>
+          <h2>Recent Games</h2>
+        </Col>
+        <Col xs={12} md={6}>
+          <h2>User Info</h2>
+        </Col>
+      </Row>
+    </Container>
+  );
 };
 
 export default HomePage;
