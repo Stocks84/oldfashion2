@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import Layout from '../components/Layout';
+import { login } from '../services/authService';
 
 const LoginPage = () => {
   const [formData, setFormData] = useState({ username: '', password: '' });
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // TODO: Connect to backend API
-    console.log('Login Data:', formData);
+    try {
+      const userData = await login(formData.username, formData.password);
+      console.log('Login successful:', userData);
+      // Handle successful login (e.g., store token, redirect)
+    } catch (err) {
+      console.error('Login failed:', err);
+      setError('Invalid username or password');
+    }
   };
 
   return (
@@ -21,6 +29,7 @@ const LoginPage = () => {
         <Row className="justify-content-md-center">
           <Col xs={12} md={6}>
             <h1>Login</h1>
+            {error && <div className="alert alert-danger">{error}</div>}
             <Form onSubmit={handleSubmit}>
               <Form.Group controlId="username" className="mb-3">
                 <Form.Label>Username</Form.Label>
@@ -58,4 +67,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
