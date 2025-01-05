@@ -11,3 +11,4 @@ export const signUp = async (data) => {
   const response = await axios.post(`${API_BASE_URL}/auth/signup`, data);
   return response.data; // Returns user data or success message
 };
+
