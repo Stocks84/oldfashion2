@@ -11,3 +11,8 @@ export const fetchUserInfo = async (userId) => {
   const response = await axios.get(`${API_BASE_URL}/users/${userId}`);
   return response.data;
 };
+
+export const login = async (username, password) => {
+  const response = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
+  return response.data; // Returns user data (e.g., token)
+};
