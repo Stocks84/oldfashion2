@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
-const AdminUserTable = ({ users }) => {
+const AdminUserTable = ({ users, onEdit, onDelete }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -9,6 +9,7 @@ const AdminUserTable = ({ users }) => {
           <th>ID</th>
           <th>Username</th>
           <th>Email</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,14 @@ const AdminUserTable = ({ users }) => {
             <td>{user.id}</td>
             <td>{user.username}</td>
             <td>{user.email}</td>
+            <td>
+              <Button variant="warning" size="sm" onClick={() => onEdit(user)}>
+                Edit
+              </Button>{' '}
+              <Button variant="danger" size="sm" onClick={() => onDelete(user.id)}>
+                Delete
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>
@@ -25,3 +34,4 @@ const AdminUserTable = ({ users }) => {
 };
 
 export default AdminUserTable;
+

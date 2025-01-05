@@ -1,7 +1,7 @@
 import React from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 
-const AdminGameTable = ({ games }) => {
+const AdminGameTable = ({ games, onEdit, onDelete }) => {
   return (
     <Table striped bordered hover>
       <thead>
@@ -9,6 +9,7 @@ const AdminGameTable = ({ games }) => {
           <th>ID</th>
           <th>Name</th>
           <th>Description</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -17,6 +18,14 @@ const AdminGameTable = ({ games }) => {
             <td>{game.id}</td>
             <td>{game.name}</td>
             <td>{game.description}</td>
+            <td>
+              <Button variant="warning" size="sm" onClick={() => onEdit(game)}>
+                Edit
+              </Button>{' '}
+              <Button variant="danger" size="sm" onClick={() => onDelete(game.id)}>
+                Delete
+              </Button>
+            </td>
           </tr>
         ))}
       </tbody>
