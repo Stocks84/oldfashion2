@@ -21,3 +21,12 @@ export const fetchGameDetails = async (gameId) => {
     likes: 123,
   });
 };
+
+export const fetchRecentGames = async () => {
+    return Promise.resolve([
+      { id: 1, name: 'Beer Pong', description: 'A classic drinking game.' },
+      { id: 2, name: 'Kings Cup', description: 'A card-based drinking game.' },
+      { id: 3, name: 'Flip Cup', description: 'A fun team-based game.' },
+    ]);
+  };
+  
