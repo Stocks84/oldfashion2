@@ -1,14 +1,11 @@
-import axios from 'axios';
+import API from "./api";
 
-const API_BASE_URL = 'https://backend-url.com/api'; // Replace with actual backend URL
-
-export const login = async (username, password) => {
-  const response = await axios.post(`${API_BASE_URL}/auth/login`, { username, password });
-  return response.data; // Returns user data (e.g., token)
+export const login = async (credentials) => {
+    const response = await API.post("/auth/login/", credentials);
+    return response.data;
 };
 
-export const signUp = async (data) => {
-  const response = await axios.post(`${API_BASE_URL}/auth/signup`, data);
-  return response.data; // Returns user data or success message
+export const signUp = async (userData) => {
+    const response = await API.post("/auth/signup/", userData);
+    return response.data;
 };
-
