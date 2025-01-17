@@ -1,14 +1,25 @@
-import axios from 'axios';
+import API from "./api";
 
-const API_BASE_URL = 'https://backend-url.com/api'; // Replace with backend URL
-
+// Fetch recent games
 export const fetchRecentGames = async () => {
-  const response = await axios.get(`${API_BASE_URL}/games/recent`);
-  return response.data;
+    const response = await API.get("/games/recent");
+    return response.data;
 };
 
+// Fetch user info by userId
 export const fetchUserInfo = async (userId) => {
-  const response = await axios.get(`${API_BASE_URL}/users/${userId}`);
-  return response.data;
+    const response = await API.get(`/users/${userId}`);
+    return response.data;
 };
 
+// Fetch all user profiles
+export const getUserProfiles = async () => {
+    const response = await API.get("/users/");
+    return response.data;
+};
+
+// Fetch all games
+export const getGames = async () => {
+    const response = await API.get("/games/");
+    return response.data;
+};

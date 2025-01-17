@@ -1,11 +1,15 @@
-import API from "./api";
+import API from './api';
 
-export const login = async (credentials) => {
-    const response = await API.post("/auth/login/", credentials);
-    return response.data;
+export const login = async (username, password) => {
+  const response = await API.post('/auth/login/', { username, password });
+  const { token, user } = response.data;
+
+  // Save token to localStorage
+  localStorage.setItem('authToken', token);
+
+  return user; // Return user data for onLoginSuccess
 };
 
-export const signUp = async (userData) => {
-    const response = await API.post("/auth/signup/", userData);
-    return response.data;
+export const logout = () => {
+  localStorage.removeItem("authToken");
 };
