@@ -7,6 +7,7 @@ import GameCard from "../components/GameCard";
 import CommentSection from "../components/CommentSection"; // Import the new component
 import { fetchGameDetails, fetchRecentGames } from "../services/gameService";
 
+
 const GameDetailsPage = () => {
     const { id } = useParams(); // Get game ID from the URL
     const [game, setGame] = useState(null);

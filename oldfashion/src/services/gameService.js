@@ -20,4 +20,10 @@ export const fetchRecentGames = async () => {
     return response.data;
 };
 
+export const fetchComments = async (gameId) => {
+    const response = await API.get(`/games/${gameId}/comments/`); // Ensure gameId is passed here
+    return response.data;
+};
+
+
   
