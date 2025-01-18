@@ -30,6 +30,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
         password: formData.password,
       });
       setSuccess('Account created successfully! You can now log in.');
+      setError(""); // Clear errors
       onSignUpSuccess(response); // Notify parent of successful sign-up
     } catch (err) {
       setError('Failed to create an account. Please try again.');

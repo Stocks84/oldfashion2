@@ -4,12 +4,14 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import GameDetails from '../components/GameDetails';
 import GameCard from '../components/GameCard';
-import { fetchGameDetails, fetchRecentGames } from '../services/gameService';
+import { fetchGameDetails, fetchRecentGames, postComment } from '../services/gameService';
 
 const GameDetailsPage = () => {
   const { id } = useParams(); // Retrieve the game ID from the URL
   const [game, setGame] = useState(null);
   const [relatedGames, setRelatedGames] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +21,7 @@ const GameDetailsPage = () => {
         const otherGames = await fetchRecentGames();
         setGame(gameData);
         setRelatedGames(otherGames.filter((g) => g.id !== parseInt(id))); // Exclude the current game
+        setComments(gameData.comments || []);
       } catch (error) {
         console.error('Failed to fetch game data:', error);
       } finally {
@@ -28,6 +31,16 @@ const GameDetailsPage = () => {
 
     loadGameData();
   }, [id]);
+
+  const handleCommentSubmit = async () => {
+    try {
+        const newCommentObj = await postComment(id, newComment); // **API Call**
+        setComments([...comments, newCommentObj]); // Append new comment
+        setNewComment(""); // Clear input
+    } catch (error) {
+        console.error('Failed to post comment:', error);
+    }
+};
 
   if (loading) {
     return (

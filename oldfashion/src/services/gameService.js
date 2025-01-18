@@ -1,8 +1,13 @@
 import API from "./api";
 
 export const fetchGames = async () => {
-    const response = await API.get("/games/");
-    return response.data;
+    try {
+        const response = await API.get("/games/");
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching games:", error);
+        throw error; // Re-throw the error to handle it in the UI
+    }
 };
 
 export const fetchGameDetails = async (gameId) => {

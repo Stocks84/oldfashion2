@@ -8,6 +8,7 @@ import { fetchRecentGames, fetchUserInfo } from "../services/homeService";
 const HomePage = () => {
     const [games, setGames] = useState([]);
     const [user, setUser] = useState({});
+    const [error, setError] = useState("");
 
     useEffect(() => {
         const loadData = async () => {
@@ -19,7 +20,7 @@ const HomePage = () => {
                 setGames(gamesData);
                 setUser(userData);
             } catch (error) {
-                console.error("Error loading data:", error);
+                setError("Failed to load data. Please try again later.");
             }
         };
 
@@ -34,6 +35,7 @@ const HomePage = () => {
                         <h1>Welcome to OldFashion</h1>
                     </Col>
                 </Row>
+                {error && <p style={{ color: "red" }}>{error}</p>}
                 <Row>
                     <Col xs={12} md={4}>
                         <UserInfoCard {...user} />

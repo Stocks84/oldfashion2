@@ -15,7 +15,8 @@ const LoginForm = ({ onLoginSuccess }) => {
         e.preventDefault();
         try {
             const user = await login(formData.username, formData.password);
-            onLoginSuccess(user); // Notify parent of successful login
+            onLoginSuccess(user);
+            setError(""); // Notify parent of successful login
         } catch (err) {
             setError("Invalid username or password");
         }
