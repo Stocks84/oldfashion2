@@ -10,4 +10,9 @@ export const fetchGameDetails = async (gameId) => {
     return response.data;
 };
 
+export const fetchRecentGames = async () => {
+    const response = await API.get("/games/recent/");
+    return response.data;
+};
+
   
