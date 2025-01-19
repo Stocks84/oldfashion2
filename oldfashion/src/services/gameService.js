@@ -1,4 +1,6 @@
 import API from "./api";
+import axios from 'axios';
+
 
 export const fetchGames = async () => {
     try {
@@ -25,5 +27,7 @@ export const fetchComments = async (gameId) => {
     return response.data;
 };
 
-
-  
+export const postComment = async (gameId, commentData) => {
+    const response = await axios.post(`/api/games/${gameId}/comments/`, commentData);
+    return response.data;
+};
