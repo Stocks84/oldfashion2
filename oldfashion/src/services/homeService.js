@@ -1,33 +1,21 @@
 import API from "./api";
 import axios from 'axios';
 
-const BASE_URL = 'https://drf-old-fashion2-89d0730feda0.herokuapp.com/api/games';
 
+const BASE_URL = 'https://drf-old-fashion2-89d0730feda0.herokuapp.com/api';
 const token = localStorage.getItem('token');
+const API_URL = `${BASE_URL}/games`;
 
-const API_URL = 'https://drf-old-fashion2-89d0730feda0.herokuapp.com/api/games';
 
+// Fetch recent games
 export const fetchRecentGames = async () => {
-    const token = localStorage.getItem('token');
-    return await axios.get(`${API_URL}/recent/`, {
+    const response = await axios.get(`${BASE_URL}/games/recent/`, {
         headers: {
             Authorization: `Bearer ${token}`,
         },
     });
+    return response.data;
 };
-// Fetch recent games
-// export const fetchRecentGames = async () => {
-//     const response = await API.get("/recent");
-//     return response.data;
-// };
-// export const fetchRecentGames = async () => {
-//     const response = await axios.get(`${BASE_URL}/recent/`, {
-//         headers: {
-//             'Authorization': `Token ${token}`
-//         }
-//     });
-//     return response.data;
-// };
 
 // Fetch user info by userId
 export const fetchUserInfo = async (userId) => {
