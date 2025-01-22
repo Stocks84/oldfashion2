@@ -1,21 +1,16 @@
 import API from "./api";
-import axios from 'axios';
 
 
 const BASE_URL = 'https://drf-old-fashion2-89d0730feda0.herokuapp.com/api';
-const token = localStorage.getItem('token');
 const API_URL = `${BASE_URL}/games`;
 
 
 // Fetch recent games
 export const fetchRecentGames = async () => {
-    const response = await axios.get(`${BASE_URL}/games/recent/`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    });
+    const response = await API.get('/games/recent/');
     return response.data;
 };
+
 
 // Fetch user info by userId
 export const fetchUserInfo = async (userId) => {
@@ -31,6 +26,6 @@ export const getUserProfiles = async () => {
 
 // Fetch all games
 export const getGames = async () => {
-    const response = await API.get("/games/");
+    const response = await API.get(API_URL);
     return response.data;
 };

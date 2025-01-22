@@ -15,10 +15,15 @@ const HomePage = () => {
             try {
                 const gamesData = await fetchRecentGames();
                 const token = localStorage.getItem("authToken");
-                const userId = JSON.parse(atob(token.split(".")[1])).user_id; // Decode token to get user ID
-                const userData = await fetchUserInfo(userId);
-                setGames(gamesData);
-                setUser(userData);
+                if (token) {
+                    const userId = JSON.parse(atob(token.split(".")[1])).user_id; // Decode token to get user ID
+                    const userData = await fetchUserInfo(userId);
+                    setUser(userData);
+                    const gamesData = await fetchRecentGames();
+                    setGames(gamesData);
+                } else {
+                    setError("User is not authenticated. Please log in.");
+                }
             } catch (error) {
                 setError("Failed to load data. Please try again later.");
             }
@@ -38,7 +43,11 @@ const HomePage = () => {
                 {error && <p style={{ color: "red" }}>{error}</p>}
                 <Row>
                     <Col xs={12} md={4}>
-                        <UserInfoCard {...user} />
+                        {user.username ? (
+                            <UserInfoCard {...user} />
+                        ) : (
+                            <p>Loading user information...</p>        
+                        )}
                     </Col>
                     <Col xs={12} md={8}>
                         <h2>Recent Games</h2>
