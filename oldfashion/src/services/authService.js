@@ -2,14 +2,11 @@ import API from './api';
 import axios from 'axios';
 
 
-export const login = async (username, password) => {
-  const response = await API.post('/auth/login/', { username, password });
-  const { token, user } = response.data;
+const BASE_URL = 'https://drf-old-fashion2-89d0730feda0.herokuapp.com/api';
 
-  // Save token to localStorage
-  localStorage.setItem('authToken', token);
-
-  return user; // Return user data for onLoginSuccess
+export const login = async (credentials) => {
+    const response = await axios.post(`${BASE_URL}/auth/token/`, credentials);
+    return response.data;
 };
 
 export const logout = () => {
