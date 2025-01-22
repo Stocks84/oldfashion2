@@ -30,10 +30,14 @@ const SignUpForm = ({ onSignUpSuccess }) => {
         password: formData.password,
       });
       setSuccess('Account created successfully! You can now log in.');
-      setError(""); // Clear errors
+      setError(null); // Clear errors
       onSignUpSuccess(response); // Notify parent of successful sign-up
     } catch (err) {
-      setError('Failed to create an account. Please try again.');
+      if (err.response && err.response.data) {
+        setError(err.rsponse.data.error || 'Failed to create an account. Please try again.');
+      } else {
+        setError('Something went wrong. Please try again.');
+      }
     }
   };
 
