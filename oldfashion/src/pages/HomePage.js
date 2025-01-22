@@ -13,14 +13,12 @@ const HomePage = () => {
     useEffect(() => {
         const loadData = async () => {
             try {
-                const gamesData = await fetchRecentGames();
                 const token = localStorage.getItem("authToken");
                 if (token) {
                     const userId = JSON.parse(atob(token.split(".")[1])).user_id; // Decode token to get user ID
                     const userData = await fetchUserInfo(userId);
                     setUser(userData);
-                    const gamesData = await fetchRecentGames();
-                    setGames(gamesData);
+                    setGames(await fetchRecentGames());
                 } else {
                     setError("User is not authenticated. Please log in.");
                 }
