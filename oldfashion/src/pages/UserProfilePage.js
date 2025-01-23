@@ -3,7 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Layout from '../components/Layout';
 import UserProfileForm from '../components/UserProfileForm';
 import { fetchUserProfile } from '../services/userService';
-import { decode } from 'jwt-decode';  // Import jwt-decode
+import { jwtDecode } from 'jwt-decode';  
+
 
 const UserProfilePage = () => {
   const [user, setUser] = useState(null);
@@ -14,8 +15,8 @@ const UserProfilePage = () => {
       try {
         // Get the user ID from the decoded JWT token stored in localStorage
         const token = localStorage.getItem('authToken');
-        const decodedToken = decode(token);  // Decode the token
-        const userId = decodedToken.user_id;  // Assuming user_id is stored in the token
+        const decodedToken = jwtDecode(token);  // Decode the token
+        const userId = decodedToken.user_id; 
         
         // Fetch user profile using the userId
         const userData = await fetchUserProfile(userId);

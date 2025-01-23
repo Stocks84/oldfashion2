@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import Layout from "../components/Layout";
 import GameCard from "../components/GameCard";
 import UserInfoCard from "../components/UserInfoCard";
-import { fetchRecentGames, fetchUserInfo } from "../services/homeService";
+import { fetchRecentGames, fetchUserProfile } from "../services/homeService";
 
 const HomePage = () => {
     const [games, setGames] = useState([]);
@@ -16,7 +16,7 @@ const HomePage = () => {
                 const token = localStorage.getItem("authToken");
                 if (token) {
                     const userId = JSON.parse(atob(token.split(".")[1])).user_id; // Decode token to get user ID
-                    const userData = await fetchUserInfo(userId);
+                    const userData = await fetchUserProfile(userId);
                     setUser(userData);
                     setGames(await fetchRecentGames());
                 } else {
