@@ -22,6 +22,8 @@ const LoginForm = ({ onLoginSuccess }) => {
     };
     try {
       const response = await login(credentials);  // Sending POST request
+      const { access, refresh } = response;
+      localStorage.setItem('authToken', access);
       setSuccess('Login successful!');
       onLoginSuccess(response);  // Handle success
     } catch (err) {
