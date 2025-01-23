@@ -12,11 +12,16 @@ export const fetchRecentGames = async () => {
 };
 
 
-// Fetch user info by userId
-export const fetchUserInfo = async (userId) => {
-    const response = await API.get(`/users/${userId}`);
-    return response.data;
-};
+// Fetch user Profile by userId
+export const fetchUserProfile = async (userId) => {
+    try {
+      const response = await API.get(`/users/${userId}`);  // Fetch user data using the authenticated API instance
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      throw error;
+    }
+  };
 
 // Fetch all user profiles
 export const getUserProfiles = async () => {
