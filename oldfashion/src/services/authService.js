@@ -12,9 +12,11 @@ const API = axios.create({
 
 // Automatically include auth token if available
 API.interceptors.request.use((config) => {
-  const token = localStorage.getItem('authToken');  // Get token from localStorage
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;  // Add token to the header
+  if (!config.url.includes('signup')) {
+    const token = localStorage.getItem('authToken');  // Get token from localStorage
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;  // Add token to the header
+    }
   }
   return config;
 });
@@ -34,6 +36,16 @@ export const logout = () => {
 };
 
 export const signUp = async (userData) => {
-  const response = await API.post(`${BASE_URL}/signup/`, userData);  // Using the API instance
-  return response.data;
+  try {
+    const response = await API.post(`${BASE_URL}/signup/`, {
+      username: userData.username,
+      email: userData.email,
+      password: userData.password,
+    });  // Using the API instance here too
+    return response.data;
+  } catch (err) {
+    console.error('Sign-up error:', err);  // Log the error for debugging
+    throw err;  // Re-throw the error so it can be handled in the component
+  }
 };
+

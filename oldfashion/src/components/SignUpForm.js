@@ -18,6 +18,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
       return;
@@ -34,7 +35,8 @@ const SignUpForm = ({ onSignUpSuccess }) => {
       onSignUpSuccess(response); // Notify parent of successful sign-up
     } catch (err) {
       if (err.response && err.response.data) {
-        setError(err.rsponse.data.error || 'Failed to create an account. Please try again.');
+        console.error('Sign-up error details:', err.response.data);
+        setError(err.response.data.detail || 'Failed to create an account. Please try again.');
       } else {
         setError('Something went wrong. Please try again.');
       }

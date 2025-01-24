@@ -17,7 +17,6 @@ const UserProfilePage = () => {
         const token = localStorage.getItem('authToken');
         const decodedToken = jwtDecode(token);  // Decode the token
         const userId = decodedToken.user_id; 
-        
         // Fetch user profile using the userId
         const userData = await fetchUserProfile(userId);
         setUser(userData);
