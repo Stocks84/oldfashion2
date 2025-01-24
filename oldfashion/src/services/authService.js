@@ -12,22 +12,22 @@ const API = axios.create({
 
 // Automatically include auth token if available
 API.interceptors.request.use((config) => {
-  if (!config.url.includes('signup')) {
-    const token = localStorage.getItem('authToken');  // Get token from localStorage
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;  // Add token to the header
-    }
+  const token = localStorage.getItem('authToken');  // Get token from localStorage
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;  // Add token to the header
   }
   return config;
 });
 
 export const login = async (credentials) => {
-  const response = await API.post(`${BASE_URL}/token/`, credentials);  // Using the API instance with interceptor
+  const response = await API.post(`${BASE_URL}/token/`, credentials); // Using the API instance with interceptor
+  localStorage.setItem("authToken", response.data.access);
   return response.data;
 };
 
 export const refreshToken = async (refreshToken) => {
   const response = await API.post(`${BASE_URL}/token/refresh/`, { refresh: refreshToken });  // Using the API instance
+  localStorage.setItem("authToken", response.data.access);
   return response.data;
 };
 
@@ -37,11 +37,8 @@ export const logout = () => {
 
 export const signUp = async (userData) => {
   try {
-    const response = await API.post(`${BASE_URL}/signup/`, {
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-    });  // Using the API instance here too
+    localStorage.removeItem('authToken'); //Clear token
+    const response = await API.post(`${BASE_URL}/signup/`, userData);
     return response.data;
   } catch (err) {
     console.error('Sign-up error:', err);  // Log the error for debugging

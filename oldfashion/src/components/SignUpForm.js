@@ -29,6 +29,8 @@ const SignUpForm = ({ onSignUpSuccess }) => {
       return;
     }
 
+    console.log('Sending data:', formData);
+
     try {
       const response = await signUp({
         username: formData.username,
