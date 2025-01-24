@@ -36,7 +36,7 @@ const SignUpForm = ({ onSignUpSuccess }) => {
         username: formData.username,
         email: formData.email,
         password: formData.password,
-        confirmPassword: formData.confirmPassword,
+        confirm_password: formData.confirmPassword,
       });
       setSuccess('Account created successfully! You can now log in.');
       setError(null); // Clear errors

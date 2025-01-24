@@ -6,8 +6,9 @@ export const updateUserProfile = async (userId, data) => {
 };
 
 export const fetchUserProfile = async () => {
+  const userId = localStorage.getItem('userId'); // Make sure userId is saved in localStorage after login
   try {
-    const response = await API.get('/users/profiles/');
+    const response = await API.get(`/users/${userId}/`); // Use the correct endpoint for a specific user
     return response.data;
   } catch (err) {
     console.error('Error fetching profile:', err);
