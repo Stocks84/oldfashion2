@@ -24,11 +24,17 @@ const SignUpForm = ({ onSignUpSuccess }) => {
       return;
     }
 
+    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
+      setError('All fields are required');
+      return;
+    }
+
     try {
       const response = await signUp({
         username: formData.username,
         email: formData.email,
         password: formData.password,
+        confirmPassword: formData.confirmPassword,
       });
       setSuccess('Account created successfully! You can now log in.');
       setError(null); // Clear errors
