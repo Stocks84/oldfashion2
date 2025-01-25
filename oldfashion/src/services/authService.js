@@ -26,6 +26,7 @@ export const login = async (credentials) => {
     return response.data;
   } catch (err) {
     console.error('login failed:', err.response?.data || err.message);
+    throw err;
   }
 };
 
