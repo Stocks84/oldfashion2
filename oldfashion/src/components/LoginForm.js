@@ -20,6 +20,8 @@ const LoginForm = ({ onLoginSuccess }) => {
       username: formData.username,
       password: formData.password,
     };
+
+    console.log('Sending credentials', credentials);
     
     try {
       const response = await login(credentials);  // Sending POST request
