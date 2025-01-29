@@ -6,8 +6,12 @@ export const fetchUserProfile = async () => {
     throw new Error('User is not authenticated.');
   }
 
-  const userId = localStorage.getItem('userId'); // Ensure this is set when the user logs in
+  const userId = localStorage.getItem('userId'); // Retrieve the userId from localStorage
   
+  if (!userId) {
+    throw new Error('User ID not found');
+  }
+
   try {
     const response = await API.get(`/users/${userId}/`, {
       headers: {
@@ -20,6 +24,7 @@ export const fetchUserProfile = async () => {
     throw err;
   }
 };
+
 
 export const updateUserProfile = async (userId, data) => {
   const token = localStorage.getItem('authToken');
