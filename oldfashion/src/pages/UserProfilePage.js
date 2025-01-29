@@ -4,31 +4,23 @@ import Layout from '../components/Layout';
 import UserProfileForm from '../components/UserProfileForm';
 import { fetchUserProfile } from '../services/userService';
 
-
-const UserProfilePage = () => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const loadUserProfile = async () => {
-      const token = localStorage.getItem('authToken');
-      if (!token) {
-        setError('You are not logged in. Please log in to view your profile.');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const userData = await fetchUserProfile();
-        setUser(userData);
-      } catch (error) {
-        setError('Failed to load user profile');
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const UserProfilePage = () => {
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const loadUserProfile = async () => {
+        try {
+          const userData = await fetchUserProfile();
+          setUser(userData);
+        } catch (error) {
+          setError('Failed to load user profile');
+          console.error(error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
     loadUserProfile();
   }, []);

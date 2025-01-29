@@ -1,27 +1,23 @@
 import API from './api'; 
 
 export const fetchUserProfile = async () => {
-  const token = localStorage.getItem('authToken');
-  if (!token) {
-    throw new Error('User is not authenticated.');
-  }
+  const token = localStorage.getItem('authToken');  // Check for valid token
+  const userId = localStorage.getItem('userId');    // Ensure the userId is stored
 
-  const userId = localStorage.getItem('userId'); // Retrieve the userId from localStorage
-  
-  if (!userId) {
-    throw new Error('User ID not found');
+  if (!token || !userId) {
+    throw new Error('User is not authenticated or user ID is missing.');
   }
 
   try {
     const response = await API.get(`/users/${userId}/`, {
       headers: {
-        Authorization: `Bearer ${token}`, // Add token in request header
+        Authorization: `Bearer ${token}`,  // Add the token to the request header
       }
     });
     return response.data;
   } catch (err) {
     console.error('Error fetching profile:', err);
-    throw err;
+    throw err;  // Re-throw the error for handling in the component
   }
 };
 
