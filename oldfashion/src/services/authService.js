@@ -22,12 +22,9 @@ API.interceptors.request.use((config) => {
 export const login = async (credentials) => {
   try {
     const response = await API.post(`${BASE_URL}/token/`, credentials); // Using the API instance with interceptor
-    
-    const { userId, access } = response.data;
-
-    localStorage.setItem("userId", userId);
+    const { access, userId } = response.data;
     localStorage.setItem("authToken", access);
-    
+    localStorage.setItem("userId", userId);
     return response.data;
   } catch (err) {
     console.error('login failed:', err.response?.data || err.message);
